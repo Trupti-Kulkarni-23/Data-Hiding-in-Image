@@ -1,0 +1,190 @@
+{% extends 'navbar.html'%} {% block content %} {% load static %}
+<style>
+  body {
+    font-family: "Lato", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  #bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    overflow: hidden;
+  }
+  #content-wrapper {
+    position: relative;
+    z-index: 1;
+  }
+
+  .jumbotron {
+    background-color: #343a40; /* Dark background color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px; /* Padding inside the jumbotron */
+    margin-top: 20px; /* Add some space at the top */
+    text-align: center; /* Center align text */
+    width: 700px;
+    margin: auto;
+  }
+  .btn {
+    background-color: #4377e6; /* Yellow background color */
+    color: #212529; /* Text color */
+    padding: 10px 20px; /* Padding inside the button */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 18px; /* Button font size */
+    cursor: pointer; /* Add pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition on hover */
+  }
+
+  .btn:hover {
+    background-color: #1a439b; /* Darker yellow background color on hover */
+    color: white;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .decryption-result {
+    margin-top: 20px;
+    background-color: #121633; /* Dark blue background color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding inside the section */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Drop shadow effect */
+    color: #fff; /* White text color */
+  }
+
+  .decryption-result h4 {
+    color: #00ff00; /* Green text color for headings */
+    font-size: 24px; /* Larger font size for headings */
+    margin-bottom: 10px; /* Add some space below the heading */
+  }
+
+  .decryption-result p {
+    color: #b0bec5; /* Light gray text color for paragraphs */
+    margin-bottom: 10px; /* Add some space between paragraphs */
+  }
+
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .container {
+      width: 90%; /* Adjust container width for smaller screens */
+    }
+
+    .decryption-result {
+      padding: 15px; /* Decrease padding for smaller screens */
+    }
+  }
+
+  /* ASCII art */
+  .ascii-art {
+    font-family: "Courier New", Courier, monospace;
+    color: #00ff00;
+    white-space: pre-wrap;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* CSS animation keyframes */
+  @keyframes fadeInZoom {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>
+<div class="container" style="margin: auto; width: 100%">
+  <img
+    src="{% static 'img1.jpeg'%}"
+    id="bg-video"
+    style="height: 100%; width: 80%"
+  />
+</div>
+
+<div id="content-wrapper">
+  <div class="container" style="padding-top: 100px; padding-bottom: 50px">
+    <h1 class="display-4" style="color: rgb(242, 242, 253)">
+      <center><b>Welcome To the Encryptor</b></center>
+    </h1>
+    <p class="lead">
+      <center style="color: #dedde4">
+        <i class="fas fa-eye-slash"></i> Feel free to encrypt any text you like
+        trust us It will be confidential.
+      </center>
+    </p>
+    <center>
+      <h3>
+        <a href="#" style="color: rgb(2, 41, 112)">
+          <b>Explore the world of cyber security</b></a
+        >
+      </h3>
+    </center>
+  </div>
+</div>
+
+<div class="container" style="width: 700px; margin: auto; text-align: center">
+  <h1 style="color: white">ENCRYPTION RESULT</h1>
+  <div class="decryption-result">
+    {% if text %}
+    <div class="alert mt-5">
+      <h4>Encrypted Text</h4>
+      <p class="text">{{text}}</p>
+    </div>
+    {% else %}
+    <p>No hidden text found in the image.</p>
+    {% endif %}
+    <hr />
+
+    {% if text_encryption %}
+    <h5 class="my-2">Encrypted Image:</h5>
+    <div class="col">
+      <a class="btn btn-dark btn-sm row" href="#" download>Download</a>
+    </div>
+    <br />
+    {% else %}
+    <p>No</p>
+    <br />
+    {% endif %}
+  </div>
+
+  {% endblock %}
+</div>
